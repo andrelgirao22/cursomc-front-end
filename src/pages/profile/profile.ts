@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { StorageService } from '../../services/storage.service';
 import { ClienteService } from '../../services/cliente.service';
-import { ClienteDto } from './../../services/domain/cliente.dto';
+import { ClienteDto } from '../../model/cliente.dto';
 
 /**
  * Generated class for the ProfilePage page.
