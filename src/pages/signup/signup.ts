@@ -33,15 +33,15 @@ export class SignupPage {
     public estadoService: EstadoService) {
 
       this.formGroup = this.formBuilder.group({
-        nome: ['Joaquim', [Validators.required, Validators.minLength(5), Validators.maxLength(5)]],
+        nome: ['Joaquim', [Validators.required, Validators.minLength(5)]],
         email: ['joaquim@gmail.com', [Validators.required, Validators.email]],
         tipo: ['1',[Validators.required]],
         cpfOuCnpj: ['06134599280',[Validators.required, Validators.minLength(11), Validators.maxLength(14)]],
         senha: ['123', [Validators.required]],
         logradouro: ['Rua Via', [Validators.required]],
         numero: ['25', [Validators.required]],
-        complemento: ['Apto 3', []],
-        bairro: ['Copacabana', []],
+        complemento: ['Apto 3',],
+        bairro: ['Copacabana',],
         cep: ['10828333', [Validators.required]],
         telefone1: ['977261827', Validators.required],
         telefone2: ['', []],
