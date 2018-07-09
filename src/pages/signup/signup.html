@@ -97,8 +97,7 @@
       </ion-select>
     </ion-item>
     <p class="danger" *ngIf="formGroup.controls['cidadeId'].dirty && formGroup.controls['cidadeId'].errors?.required" margin-left >Valor Inválido</p>
-    <button ion-button type="submit" [disabled]="formGroup.invalid">Criar conta</button>    
-    {{ formGroup.valid }}
+    <button ion-button type="submit" [disabled]="formGroup.invalid">Criar conta</button> 
   </form>
 
 </ion-content>
