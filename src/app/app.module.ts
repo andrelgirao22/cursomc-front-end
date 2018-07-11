@@ -1,3 +1,4 @@
+import { CartService } from './../services/cart.service';
 import { ProdutoService } from './../services/produto.service';
 import { AuthInterceptorProvider } from './../interceptors/auth-interceptor';
 import { ClienteService } from './../services/cliente.service';
@@ -38,6 +39,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AuthService,
     ClienteService,
     ProdutoService,
+    CartService,
     AuthInterceptorProvider
   ]
 })
