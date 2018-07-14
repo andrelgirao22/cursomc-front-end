@@ -5,12 +5,6 @@ import { StorageService } from '../../services/storage.service';
 import { ClienteService } from '../../services/cliente.service';
 import { ClienteDto } from '../../model/cliente.dto';
 
-/**
- * Generated class for the ProfilePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -35,7 +29,7 @@ export class ProfilePage {
       this.clienteService.findByEmail(localUser.email)
         .subscribe(response => {
           console.log('response',response)
-          this.cliente = response
+          this.cliente = response as ClienteDto
           this.getImageIfExist()
         }, error => {
           if(error.status == 403) {
