@@ -15,6 +15,7 @@ import { MyApp } from './app.component';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { ImageUtilService } from '../services/Image-util.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     ClienteService,
     ProdutoService,
     CartService,
-    AuthInterceptorProvider
+    AuthInterceptorProvider,
+    ImageUtilService
   ]
 })
 export class AppModule {}
