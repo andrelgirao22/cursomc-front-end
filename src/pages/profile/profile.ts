@@ -5,6 +5,7 @@ import { StorageService } from '../../services/storage.service';
 import { ClienteService } from '../../services/cliente.service';
 import { ClienteDto } from '../../model/cliente.dto';
 import { CameraOptions, Camera } from '../../../node_modules/@ionic-native/camera';
+import { DomSanitizer } from '../../../node_modules/@angular/platform-browser';
 
 
 @IonicPage()
@@ -17,13 +18,17 @@ export class ProfilePage {
   cliente: ClienteDto
   picture: string
   cameraOn: boolean = false
+  profileImage // = "cliente?.imageUrl || ''"
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public storage: StorageService,
     public clienteService: ClienteService,
-    public camera: Camera) {
+    public camera: Camera,
+    public sanitizer: DomSanitizer) {
+
+      this.profileImage = 'assets/imgs/avatar-blank.png'
   }
 
   ionViewDidLoad() {
@@ -54,8 +59,23 @@ export class ProfilePage {
         .subscribe(response => {
           console.log('response', response)
           this.cliente.imageUrl = `${API_CONFIG.bucketBaseUrl}/cp${this.cliente.id}.jpg` 
+          this.blobToDataURL(response).then(dataUrl => {
+            let str = dataUrl as string
+            this.profileImage = this.sanitizer.bypassSecurityTrustUrl(str)
+          })
         }, 
-        error => {})
+        error => {
+          this.profileImage = 'assets/imgs/avatar-blank.png'
+        })
+  }
+
+  blobToDataURL(blob) {
+    return new Promise((fulfill, reject) => {
+      let reader = new FileReader()
+      reader.onerror = reject
+      reader.onload = (e) => fulfill(reader.result)
+      reader.readAsDataURL(blob) 
+    })
   }
 
   getCameraPicture() {
@@ -70,7 +90,6 @@ export class ProfilePage {
     }
     
     this.camera.getPicture(options).then((imageData) => {
-     
      this.picture = 'data:image/png;base64,' + imageData;
      this.cameraOn = false
      
@@ -104,7 +123,7 @@ export class ProfilePage {
   sendPicture() {
     this.clienteService.uploadPicture(this.picture).subscribe(response => {
       this.picture = null
-      this.loadData()
+      this.getImageIfExist()
     }, error => {
       this.cameraOn = false
     })
