@@ -97,7 +97,7 @@ export class ProfilePage {
      this.cameraOn = false
      
     }, (err) => {
-
+      this.cameraOn = false
     });
   }
 
@@ -105,7 +105,9 @@ export class ProfilePage {
     this.clienteService.uploadPicture(this.picture).subscribe(response => {
       this.picture = null
       this.loadData()
-    }, error => {})
+    }, error => {
+      this.cameraOn = false
+    })
   }
 
   cancelPicture() {
